@@ -43,7 +43,7 @@
 <meta name="twitter:card" content="summary">
 <meta property="twitter:title" content="Shannon decomposition">
 <script type="application/ld+json">
-{"description":"A Book to learn Digital Logic Design.","@type":"WebPage","url":"https://learn.circuitverse.org/docs/binary-algebra/shannon.html","headline":"Shannon decomposition","@context":"https://schema.org"}</script>
+{"description":"A Book to learn Digital Logic Design.","@type":"WebPage","headline":"Shannon decomposition","url":"https://learn.circuitverse.org/docs/binary-algebra/shannon.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -245,21 +245,64 @@
       
       <div id="main-content" class="main-content" role="main">
         
-          <script type="text/javascript">
- 
-// Wait for the page to load first
-window.onload = function() {
-     
-	// sidebar collapse code
+          <div id="progress-bar"></div>
+<script type="text/javascript">
+
+	// [Critical Content]
+	// Load State for Sidebar Functionality
 	var sidebar = document.querySelector("div.side-bar");
-	var sidebarButton = document.getElementById("sidebarCollapse");
 	var mainContent = document.getElementById("top");
-		
-	sidebarButton.onclick = function() {
-		sidebar.classList.toggle("active");
-		mainContent.classList.toggle("sidebar-toggle");
+	var isSidebar = localStorage.getItem('Sidebar');
+	
+	if (isSidebar == null) {
+		sidebar.classList.remove('active');
+		mainContent.classList.remove('sidebar-toggle');
 	}
-}
+	else if (isSidebar == 0) {
+		isSidebar = 0;
+		localStorage.setItem('Sidebar', isSidebar);
+		sidebar.classList.add('active');
+		mainContent.classList.add('sidebar-toggle');
+	}
+	else {
+		sidebar.classList.remove('active');
+		mainContent.classList.remove('sidebar-toggle');
+	}
+
+	// Wait for the page to load first
+	$(document).ready(function () {
+		var sidebarButton = document.getElementById("sidebarCollapse");
+		sidebarButton.onclick = function () {
+			if (isSidebar == 0) {
+				isSidebar = 1;
+				localStorage.setItem('Sidebar', isSidebar);
+				sidebar.classList.toggle("active");
+				mainContent.classList.toggle("sidebar-toggle");
+			}
+			else {
+				isSidebar = 0;
+				localStorage.setItem('Sidebar', isSidebar);
+				sidebar.classList.toggle("active");
+				mainContent.classList.toggle("sidebar-toggle");
+			}
+		}
+	})
+
+	// Progress-bar 
+	const progress_bar = document.querySelector('#progress-bar')
+	const main_content= document.querySelector('#main-content-wrap')
+
+	const animateProgressBar = () => {
+		let scrollDistance = -main_content.getBoundingClientRect().top;
+		let progressWidth = (scrollDistance / (main_content.getBoundingClientRect().height - document.documentElement.clientHeight ) )*100;
+		if(progressWidth<6){
+			progress_bar.style.width = 0 + '%';
+		}
+		else{
+			progress_bar.style.width = progressWidth + '%';
+		}
+	}
+	window.addEventListener('scroll',animateProgressBar);
 </script>
 
 <!-- -*- engine:django -*- -->	
@@ -388,7 +431,7 @@ window.onload = function() {
           <footer>
             
 
-            <p class="text-small text-grey-dk-100 mb-0">Copyright © 2021 Contributors to CircuitVerse. Distributed under a [CC-by-sa] license.</p>
+            <p class="text-small text-grey-dk-100 mb-0">Copyright © 2022 Contributors to CircuitVerse. Distributed under a [CC-by-sa] license.</p>
 
             
               <div class="d-flex mt-2">

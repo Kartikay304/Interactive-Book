@@ -6256,7 +6256,7 @@ figure.highlight {
     max-width: none;
     margin-left: 0; } }
 input {
-  color: #000000; }
+  color: #ffffff; }
 
 #sidebar.active {
   display: none; }
@@ -6409,3 +6409,32 @@ defs path {
   right: 15px;
   position: fixed;
   bottom: 15px; }
+
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+button,
+.main-content,
+.side-bar,
+.site-nav,
+.search {
+  transition: linear 0.3s; }
+
+.search-active .search-input,
+.search-active .search-results {
+  background-color: #13101f; }
+
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: #00e8b3;
+  width: 0%;
+  z-index: 10000; }
+
+.text-grey-dk-100 {
+  color: white !important; }

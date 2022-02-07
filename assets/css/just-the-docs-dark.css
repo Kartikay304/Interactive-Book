@@ -6409,3 +6409,29 @@ defs path {
   right: 15px;
   position: fixed;
   bottom: 15px; }
+
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+button,
+.main-content,
+.side-bar,
+.site-nav,
+.search {
+  transition: linear 0.3s; }
+
+.search-active .search-input,
+.search-active .search-results {
+  background-color: #27262b; }
+
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: #2c84fa;
+  width: 0%;
+  z-index: 10000; }

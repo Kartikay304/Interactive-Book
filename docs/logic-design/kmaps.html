@@ -43,7 +43,7 @@
 <meta name="twitter:card" content="summary">
 <meta property="twitter:title" content="K-Maps">
 <script type="application/ld+json">
-{"description":"A Book to learn Digital Logic Design.","@type":"WebPage","url":"https://learn.circuitverse.org/docs/logic-design/kmaps.html","headline":"K-Maps","@context":"https://schema.org"}</script>
+{"description":"A Book to learn Digital Logic Design.","@type":"WebPage","headline":"K-Maps","url":"https://learn.circuitverse.org/docs/logic-design/kmaps.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -244,21 +244,64 @@
       
       <div id="main-content" class="main-content" role="main">
         
-          <script type="text/javascript">
- 
-// Wait for the page to load first
-window.onload = function() {
-     
-	// sidebar collapse code
+          <div id="progress-bar"></div>
+<script type="text/javascript">
+
+	// [Critical Content]
+	// Load State for Sidebar Functionality
 	var sidebar = document.querySelector("div.side-bar");
-	var sidebarButton = document.getElementById("sidebarCollapse");
 	var mainContent = document.getElementById("top");
-		
-	sidebarButton.onclick = function() {
-		sidebar.classList.toggle("active");
-		mainContent.classList.toggle("sidebar-toggle");
+	var isSidebar = localStorage.getItem('Sidebar');
+	
+	if (isSidebar == null) {
+		sidebar.classList.remove('active');
+		mainContent.classList.remove('sidebar-toggle');
 	}
-}
+	else if (isSidebar == 0) {
+		isSidebar = 0;
+		localStorage.setItem('Sidebar', isSidebar);
+		sidebar.classList.add('active');
+		mainContent.classList.add('sidebar-toggle');
+	}
+	else {
+		sidebar.classList.remove('active');
+		mainContent.classList.remove('sidebar-toggle');
+	}
+
+	// Wait for the page to load first
+	$(document).ready(function () {
+		var sidebarButton = document.getElementById("sidebarCollapse");
+		sidebarButton.onclick = function () {
+			if (isSidebar == 0) {
+				isSidebar = 1;
+				localStorage.setItem('Sidebar', isSidebar);
+				sidebar.classList.toggle("active");
+				mainContent.classList.toggle("sidebar-toggle");
+			}
+			else {
+				isSidebar = 0;
+				localStorage.setItem('Sidebar', isSidebar);
+				sidebar.classList.toggle("active");
+				mainContent.classList.toggle("sidebar-toggle");
+			}
+		}
+	})
+
+	// Progress-bar 
+	const progress_bar = document.querySelector('#progress-bar')
+	const main_content= document.querySelector('#main-content-wrap')
+
+	const animateProgressBar = () => {
+		let scrollDistance = -main_content.getBoundingClientRect().top;
+		let progressWidth = (scrollDistance / (main_content.getBoundingClientRect().height - document.documentElement.clientHeight ) )*100;
+		if(progressWidth<6){
+			progress_bar.style.width = 0 + '%';
+		}
+		else{
+			progress_bar.style.width = progressWidth + '%';
+		}
+	}
+	window.addEventListener('scroll',animateProgressBar);
 </script>
 
 <!-- -*- engine:django -*- -->	
@@ -577,6 +620,44 @@ window.onload = function() {
 
 
 
+<ol class="quiz">
+  <li>___  are known as diagonal mapping ?
+    <ul>
+      <li>POS</li>
+      <li>SOP
+        <ol>
+          <li>Entries</li>
+        </ol>
+        <ul>
+          <li>Latches</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>K-map can be used to minimize functions of up to ___ variables ?
+    <ul>
+      <li>5</li>
+      <li>2
+        <ol>
+          <li>6</li>
+        </ol>
+      </li>
+      <li>3</li>
+    </ul>
+  </li>
+  <li>In which K-map 16 cells are there ?
+     * 2-variable
+    <ul>
+      <li>3-variable
+        <ol>
+          <li>4-variable</li>
+        </ol>
+      </li>
+      <li>5-variable</li>
+    </ul>
+  </li>
+</ol>
+
 
 
 <div class="prev-next-controls mt-3">
@@ -640,7 +721,7 @@ window.onload = function() {
           <footer>
             
 
-            <p class="text-small text-grey-dk-100 mb-0">Copyright © 2021 Contributors to CircuitVerse. Distributed under a [CC-by-sa] license.</p>
+            <p class="text-small text-grey-dk-100 mb-0">Copyright © 2022 Contributors to CircuitVerse. Distributed under a [CC-by-sa] license.</p>
 
             
               <div class="d-flex mt-2">
